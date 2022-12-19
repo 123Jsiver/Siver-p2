@@ -79,8 +79,7 @@ window.addEventListener('load', function() {
 
 }, false);
 
-function GalleryImage() {
-	//implement me as an object to hold the following data about an image:
+let galleryImage = function GalleryImage() {
 	location: "";
 	description: "";
 	date: "";
