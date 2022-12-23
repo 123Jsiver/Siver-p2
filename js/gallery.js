@@ -46,11 +46,19 @@ var mCurrentIndex = 0;
 // XMLHttpRequest variable
 var mRequest = new XMLHttpRequest();
 
+// Holds the retrived JSON information
+var mJson;
+
+mRequest.onreadychangestate = function (){
+	if(this.ready == 4 && this.status == 200){
+		mjason = JSON.parse(mRequest.responseText);
+		iterateThough;
+	}
+}
+
 // Array holding GalleryImage objects (see below).
 var mImages = [];
 
-// Holds the retrived JSON information
-var mJson;
 
 // URL for the JSON to load by default
 // Some options for you are: images.json, images.short.json; you will need to create your own extra.json later
@@ -80,8 +88,8 @@ window.addEventListener('load', function() {
 }, false);
 
 let galleryImage = function GalleryImage() {
-	location: "";
-	description: "";
-	date: "";
-	image: "";
+	let location = "";
+	let description = "";
+	let date = "";
+	let image = "";
 }
