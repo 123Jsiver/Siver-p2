@@ -33,8 +33,13 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
-	document.getElementById('photo').src = mImages[0].img;
+	document.getElementById('photo').src = mImages[mCurrentIndex].img;
+	document.getElementByClassName('details').innerHTML = "Location: " + mImages[mCurrentIndex].location;
+	document.getElementByClassName('details').innerHTML = "Description: " + mImages[mCurrentIndex].description;
+	document.getElementByClassName('details').innerHTML = "Date: " + mImages[mCurrentIndex].date;
 	console.log('swap photo');
+	mLastFrameTime = 0;
+	mCurrentIndex += 1;
 }
 
 
@@ -51,9 +56,10 @@ var mJson;
 
 var mUrl = 'images.json';
 
-mRequest.onreadychangestate = function (){
+mRequest.onreadystatechange = function (){
 	if(this.readyState == 4 && this.status == 200){
 		mJson = JSON.parse(mRequest.responseText);
+		console.log("before iteration");
 		iterateJSON(mJson);
 	}
 };
@@ -92,12 +98,18 @@ function GalleryImage() {
 
 function iterateJSON(mJson)
 {
-	for(x = 0; x < mJson.images.length; x++)
-	{
-		mImages[x] = new GalleryImage();
-		mImages[x].location = mJson.images[x].imglocation;
-		mImages[x].description = mJson.images[x].description;
-		mImages[x].date = mJson.images[x].date;
-		mImages[x].img = mJson.images[x].imgPath;
-	}
+  console.log("in iteration");
+for( x= 0; x < mJson.images.length; x++)
+{
+  mImages[x]= new GalleryImage();
+  mImages[x].location = mJson.images[x].imgLocation;
+  mImages[x].description = mJson.images[x].description;
+  mImages[x].img = mJson.images[x].imgPath;
+  mImages[x].date = mJson.images[x].date;
+  //   console.log("img path: " + mImages[x].img);
+  console.log("img location: " + mJson.images[x].imgLocation);
+  console.log("img description: " + mJson.images[x].description);
+  console.log("img date: " + mJson.images[x].date);
+  console.log("img path: " + mJson.images[x].imgPath);
+}
 }
