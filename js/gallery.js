@@ -33,8 +33,47 @@ function animate() {
 /************* DO NOT TOUCH CODE ABOVE THIS LINE ***************/
 
 function swapPhoto() {
-	document.getElementById('photo').src = mImages[0].img;
-	console.log('swap photo');
+    if(mCurrentIndex >= mImages.length){
+      mCurrentIndex = 0
+    } 
+    else{
+      
+    };
+
+    if(mCurrentIndex < 0)
+    {
+      mCurrentIndex = mImages[12]
+    }
+    else{
+
+    };
+
+  document.getElementById('photo').src = mImages[mCurrentIndex].img;
+  var loc = document.getElementsByClassName('location');
+  loc[0].innerHTML = "Location: " + mImages[mCurrentIndex].location;
+  var des = document.getElementsByClassName('description');
+  des[0].innerHTML = "Description: " + mImages[mCurrentIndex].description;
+  var dt = document.getElementsByClassName('date');
+  dt[0].innerHTML = "Date: " + mImages[mCurrentIndex].date;
+
+  mLastFrameTime = 0;
+  mCurrentIndex += 1;
+
+  console.log('swap photo');
+}
+  
+function toggleDetails()
+{
+  if($(".monIndicator").hasClass("rot90"))
+{
+  $(".moreIndicator" ).removeClass("rot90");
+  $(".moreIndicator" ).addClass("rot270");
+}
+else {
+  $(".moreIndicator" ).removeClass("rot270");
+  $(".moreIndicator" ).addClass("rot90");
+}
+$( ".details" ).slideToggle( "slow", "linear" );
 }
 
 var mImages = [];
@@ -76,6 +115,7 @@ $(document).ready( function() {
 	  at: "right bottom",
 	  of: "#nav"
 	});
+  fetchJSON();
   });
 
 window.addEventListener('load', function() {
